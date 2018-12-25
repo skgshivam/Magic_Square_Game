@@ -1,0 +1,120 @@
+<!doctype html>
+	<html>
+		<body onLoad="new_game()">
+		<center>
+			<h1> Magic Square </h1>
+			<hr><hr>
+			<br>
+		</center>
+
+		<table style="padding:10px">
+			<tr>
+				<td style="width:30% height:100px">
+			<form style="font-size:30px">
+			<input type="button" value=" " onclick="swap(0)">
+			<input type="button" value=" " onclick="swap(1)">
+			<input type="button" value=" " onclick="swap(2)"><br>
+			<input type="button" value=" " onclick="swap(3)">
+			<input type="button" value=" " onclick="swap(4)">
+			<input type="button" value=" " onclick="swap(5)"><br>
+			<input type="button" value=" " onclick="swap(6)">
+			<input type="button" value=" " onclick="swap(7)">
+			<input type="button" value=" " onclick="swap(8)">
+			</form>
+			<br><br>
+			No of Moves  &nbsp<input type="text" value=" " id="count" style="width:30px"><br> <br>
+			<button onclick="new_game()"> Start a new Game </button>
+			</td>
+			<td style="width:70%; font-size:20px; vertical-align:top">
+				In this game you have to make a magic square i.e a matrix in which elements are arranged in order.
+				<br>
+				You are allowed to swap only the elements that are either left or right or top or bottom of the box 					containing element 0 with 0 you have to make ordered matrix in minimum no of moves.<br><br>
+				ALL THE BEST !!
+			
+
+			</td>
+		</table>
+					<script>
+
+		var pos=[9,9,9,9,9,9,9,9,9];
+		var count=0;
+		function check()
+		{	var v=0;
+			var i;
+			for(i=0;i<9;i++)
+			{
+				if(pos[i]==i)
+				v++;
+			}
+			if(v==9)
+			{alert('Congratulations!! You made it');
+			
+			}
+	}
+		function display(pos) {
+			for (var i=0; i<9; i++)  {
+				document.forms[0].elements[i].value = pos[i];
+			}
+			document.getElementById('count').value=count;
+		check();
+		}
+		
+		function new_game()
+		{	count=0;
+			var i,ran;
+			for(i=0;i<9;i++)
+			{	var flag=0;
+				ran=Math.floor(Math.random()*9);
+				pos[i]=ran;
+				for(j=0;j<i;j++)
+					{
+						if(ran==pos[j])
+						{flag=1;
+						break;	}
+					}
+			
+				if(flag==1)
+				{
+					i--;
+					continue;
+				}
+			}
+		display(pos);
+		}
+		function change(x,y)
+		{	count++;
+			var temp;
+			temp=pos[x];
+			pos[x]=pos[y];
+			pos[y]=temp;
+		}
+		function swap(a)
+		{	
+			if(a!=0)
+			{
+				if(pos[a-1]==0)
+				change(a,a-1);
+			}
+			if(a!=8)
+			{
+				if(pos[a+1]==0)
+				change(a,a+1);
+			}
+
+			if(a>2)
+			{
+				if(pos[a-3]==0)
+				change(a,a-3);
+			}
+			if(a<6)
+			{
+				if(pos[a+3]==0)
+				change(a,a+3)
+			}
+		display(pos);
+		}
+		
+		</script>	
+	
+		</body>
+	</html>
